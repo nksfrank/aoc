@@ -1,0 +1,5 @@
+// Vitest Snapshot v1
+
+exports[`day 2 > live 1`] = `15422`;
+
+exports[`day 2 > live 2`] = `15442`;
