@@ -1,0 +1,11 @@
+import { partOne, partTwo } from "./2022/one.js";
+import { readFileSync } from "node:fs";
+const one = readFileSync("./2022/one.txt", "utf-8");
+const t0 = performance.now();
+partOne(one);
+const t1 = performance.now();
+console.log(`Call to partOne took ${t1 - t0} milliseconds.`);
+const t2 = performance.now();
+partTwo(one);
+const t3 = performance.now();
+console.log(`Call to partTwo took ${t3 - t2} milliseconds.`);

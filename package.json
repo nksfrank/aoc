@@ -1,0 +1,15 @@
+{
+  "name": "aoc",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "author": "nksFrank",
+  "license": "MIT",
+  "devDependencies": {
+    "vitest": "^0.25.3"
+  }
+}
