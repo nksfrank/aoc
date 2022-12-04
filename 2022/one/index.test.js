@@ -24,11 +24,3 @@ test("part one works", () => {
 test("part two works", () => {
   expect(partTwo(data)).toEqual(45000);
 });
-test("live", () => {
-  const input = fs.readFileSync(
-    path.resolve(__dirname, "./input.txt"),
-    "utf-8"
-  );
-  expect(partOne(input)).toMatchSnapshot();
-  expect(partTwo(input)).toMatchSnapshot();
-});

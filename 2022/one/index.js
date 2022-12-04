@@ -11,3 +11,13 @@ export const partTwo = (data) =>
     .flatMap(sum)
     .reduce((acc, item) => [...acc, item].sort((a, b) => b - a).slice(0, 3), [])
     .reduce(add);
+
+(async () => {
+  const fs = await import("node:fs");
+  const path = await import("node:path");
+  const input = fs.readFileSync(
+    path.resolve(__dirname, "./input.txt"),
+    "utf-8"
+  );
+  console.log(partOne(input), partTwo(input));
+})();

@@ -42,3 +42,12 @@ export const partOne = (inputs) =>
     .map((l) => roundPoint[conditions[l]] + points[l])
     .reduce((a, b) => a + b);
 export const partTwo = (inputs) => partOne(inputs.map((l) => moveSet[l]));
+
+(async () => {
+  const fs = await import("node:fs");
+  const path = await import("node:path");
+  const input = fs
+    .readFileSync(path.resolve(__dirname, "./input.txt"), "utf-8")
+    .split("\n");
+  console.log(partOne(input), partTwo(input));
+})();

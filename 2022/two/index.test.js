@@ -13,10 +13,3 @@ test("part one works", () => {
 test("part two works", () => {
   expect(partTwo(data)).toEqual(12);
 });
-test("live", () => {
-  const inputs = fs
-    .readFileSync(path.resolve(__dirname, "./input.txt"), "utf-8")
-    .split("\n");
-  expect(partOne(inputs)).toMatchSnapshot();
-  expect(partTwo(inputs)).toMatchSnapshot();
-});
