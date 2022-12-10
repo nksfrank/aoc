@@ -12,11 +12,11 @@ export const partTwo = (data) =>
     .reduce((acc, item) => [...acc, item].sort((a, b) => b - a).slice(0, 3), [])
     .reduce(add);
 
-(async () => {
+if (process.env.NODE_ENV === "production") {
   const fs = await import("node:fs");
   const input = fs.readFileSync(
     new URL("./input.txt", import.meta.url),
     "utf-8"
   );
   console.log(partOne(input), partTwo(input));
-})();
+}

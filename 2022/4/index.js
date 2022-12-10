@@ -23,11 +23,11 @@ export const partTwo = (inputs) =>
     ([[a0, a1], [b0, b1]]) => (a0 >= b0 && a0 <= b1) || (b0 >= a0 && b0 <= a1)
   ).length;
 
-(async () => {
+if (process.env.NODE_ENV === "production") {
   const fs = await import("node:fs");
   const input = fs.readFileSync(
     new URL("./input.txt", import.meta.url),
     "utf-8"
   );
   console.log(partOne(input), partTwo(input));
-})();
+}

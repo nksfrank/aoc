@@ -2,10 +2,12 @@
  *
  * @param {*} inputs
  */
-export const partOne = (inputs, span = 4) =>
-  [...inputs].findIndex(
-    (_, i, arr) => Array.from(new Set(arr.slice(i, i + span))).length === span
-  ) + span;
+export const partOne = (inputs) => {};
+/**
+ *
+ * @param {*} inputs
+ */
+export const partTwo = (inputs) => {};
 
 if (process.env.NODE_ENV === "production") {
   const fs = await import("node:fs");
@@ -14,5 +16,5 @@ if (process.env.NODE_ENV === "production") {
     path.resolve(__dirname, "./input.txt"),
     "utf-8"
   );
-  console.log(partOne(input), partOne(input, 14));
+  console.log(partOne(input), partTwo(input));
 }

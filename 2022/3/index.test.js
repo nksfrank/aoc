@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { expect, test } from "bun:test";
 import {
   compartments,
   groupBy,
@@ -34,18 +34,22 @@ test("pointsMap", () => {
   expect(pointsMap["Z"]).toEqual(52);
 });
 
-test.each([
-  [["vJrwpWtwJgWrhcsFMMfFFhFp", "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"], "r"],
+test("intersects", () => {
   [
+    [["vJrwpWtwJgWrhcsFMMfFFhFp", "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"], "r"],
     [
-      "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
-      "ttgJtRGJQctTZtZT",
-      "CrZsJsPPZsGzwwsLwLmpwMDw",
+      [
+        "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+        "ttgJtRGJQctTZtZT",
+        "CrZsJsPPZsGzwwsLwLmpwMDw",
+      ],
+      "Z",
     ],
-    "Z",
-  ],
-])("intersects", (cases, expected) => {
-  expect(intersects(cases.map((s) => new Set(s.split(""))))).toEqual(expected);
+  ].forEach(([cases, expected]) => {
+    expect(intersects(cases.map((s) => new Set(s.split(""))))).toEqual(
+      expected
+    );
+  });
 });
 test("groupBy", () => {
   expect(

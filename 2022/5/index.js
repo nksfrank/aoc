@@ -67,7 +67,7 @@ export const partTwo = (inputs) => {
   return formatOutput(crates);
 };
 
-(async () => {
+if (process.env.NODE_ENV === "production") {
   const fs = await import("node:fs");
   const path = await import("node:path");
   const input = fs.readFileSync(
@@ -75,4 +75,4 @@ export const partTwo = (inputs) => {
     "utf-8"
   );
   console.log(partOne(input), partTwo(input));
-})();
+}

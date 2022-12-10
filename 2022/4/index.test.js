@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { expect, test } from "bun:test";
 import { partOne, partTwo } from ".";
 
 const data = `2-4,6-8
@@ -8,18 +8,20 @@ const data = `2-4,6-8
 6-6,4-6
 2-6,4-8`;
 
-test.each([
-  [data, 2],
+test("partOne works", () => {
   [
-    `2-6,2-6
-  2-6,6-7
-  2-6,4-6
-  2-2,2-6
-  2-6,6-6`,
-    4,
-  ],
-])("partOne works", (input, expected) => {
-  expect(partOne(input)).toEqual(expected);
+    [data, 2],
+    [
+      `2-6,2-6
+    2-6,6-7
+    2-6,4-6
+    2-2,2-6
+    2-6,6-6`,
+      4,
+    ],
+  ].forEach(([input, expected]) => {
+    expect(partOne(input)).toEqual(expected);
+  });
 });
 
 test("partTwo works", () => {

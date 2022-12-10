@@ -41,11 +41,11 @@ export const partTwo = (inputs, size) =>
     .map(toPoint)
     .reduce(sum);
 
-(async () => {
+if (process.env.NODE_ENV === "production") {
   const fs = await import("node:fs");
   const input = fs.readFileSync(
     new URL("./input.txt", import.meta.url),
     "utf-8"
   );
   console.log(partOne(input), partTwo(input, 3));
-})();
+}

@@ -43,10 +43,10 @@ export const partOne = (inputs) =>
     .reduce((a, b) => a + b);
 export const partTwo = (inputs) => partOne(inputs.map((l) => moveSet[l]));
 
-(async () => {
+if (process.env.NODE_ENV === "production") {
   const fs = await import("node:fs");
   const input = fs
     .readFileSync(new URL("./input.txt", import.meta.url), "utf-8")
     .split("\n");
   console.log(partOne(input), partTwo(input));
-})();
+};

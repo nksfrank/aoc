@@ -5,12 +5,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest"
+    "test": "bun wiptest"
   },
   "author": "nksFrank",
   "license": "MIT",
   "devDependencies": {
-    "vitest": "^0.25.3",
-    "vitest-github-actions-reporter": "0.9.0"
+    "bun-types": "^0.3.0"
   }
 }
