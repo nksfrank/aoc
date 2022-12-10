@@ -14,15 +14,14 @@ jobs:
     - name: 🛎️ checkout repository
       uses: actions/checkout@v3
 
-    - name: install node 
-      uses: actions/setup-node@v3
+    - name: Install bun
+      uses: xhyrom/setup-bun@v0.1.8
       with:
-        cache-dependency-path: "**/package-lock.json"
-        node-version: "lts/*"
-        cache: "npm"
+        bun-version: canary
+        github-token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: 🚚 install packages
-      run: npm install
+      run: bun install
       
     - name: 🧪 run tests
-      run: npm test
+      run: bun test
