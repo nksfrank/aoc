@@ -1,4 +1,4 @@
-package three
+package day3
 
 import (
 	"io"
@@ -15,12 +15,12 @@ func TestDayThree(t *testing.T) {
 		input io.Reader
 		fn func(r io.Reader) int
 	}{
-		// {
-		// 	name: "part one",
-		// 	want: 4361,
-		// 	input: cmdtest.Input(t, "test.txt"),
-		// 	fn: partOne,
-		// },
+		{
+			name: "part one",
+			want: 4361,
+			input: cmdtest.Input(t, "test.txt"),
+			fn: partOne,
+		},
 		// {
 		// 	name: "connecting parts",
 		// 	want: 256+128,

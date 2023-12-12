@@ -1,4 +1,4 @@
-package two
+package day4
 
 import (
 	"io"
@@ -17,16 +17,16 @@ func TestDayTwo(t *testing.T) {
 	}{
 		{
 			name: "part one",
-			want: 8,
+			want: 13,
 			input: cmdtest.Input(t, "test.txt"),
 			fn: partOne,
 		},
-		{
-			name: "part two",
-			want: 2286,
-			input: cmdtest.Input(t, "test.txt"),
-			fn: partTwo,
-		},
+		// {
+		// 	name: "part two",
+		// 	want: 0,
+		// 	input: cmdtest.Input(t, "test.txt"),
+		// 	fn: partTwo,
+		// },
 	}
 
 	for _, tt := range tests {

@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	one "github.com/nksfrank/aoc/cmd/1"
-	two "github.com/nksfrank/aoc/cmd/2"
-	three "github.com/nksfrank/aoc/cmd/3"
+	"github.com/nksfrank/aoc/cmd/day1"
+	"github.com/nksfrank/aoc/cmd/day2"
+	"github.com/nksfrank/aoc/cmd/day3"
+	"github.com/nksfrank/aoc/cmd/day4"
 	"github.com/spf13/cobra"
 )
 
@@ -25,9 +26,10 @@ var dayCmd = &cobra.Command{
 
 func init() {
 	dayCmd.AddCommand(
-		one.Cmd,
-		two.Cmd,
-		three.Cmd,
+		day1.Cmd,
+		day2.Cmd,
+		day3.Cmd,
+		day4.Cmd,
 	)
 	rootCmd.AddCommand(dayCmd)
 }
