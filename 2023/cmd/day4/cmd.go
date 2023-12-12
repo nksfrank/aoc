@@ -8,7 +8,7 @@ import (
 )
 
 
-var Cmd = *aoc.NewDayCmd(&cobra.Command{
+var Cmd = aoc.NewDayCmd(&cobra.Command{
 	Use:   "4",
 	Short: "Day four of Advent of Code 2023",
 	Long:  "Day four of Advent of Code 2023",
