@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"io"
 	"strings"
-	"sync"
 
 	"github.com/nksfrank/aoc/internal/aoc"
 	"github.com/spf13/cobra"
@@ -20,34 +19,21 @@ var Cmd = aoc.NewDayCmd(&cobra.Command{
 func partOne(rd io.Reader) int {
 	s := bufio.NewScanner(rd)
 
-	wg := &sync.WaitGroup{}
-	res := make(chan int, 6)
+	sum := 0
 	for s.Scan() {
 		line := s.Text()
-		wg.Add(1)
-		go parseCard(res, line, wg)
-	}
-	go func() {
-		wg.Wait()
-		close(res)
-	}()
-
-	sum := 0
-	for i := range res {
-		sum += i
+		sum += parseCard(line)
 	}
 
 	return sum
 }
 
-func parseCard(res chan<- int, line string, wg *sync.WaitGroup) {
-	defer wg.Done()
+func parseCard(line string) int {
 	line = strings.ReplaceAll(line, "  ", " ")
 	line = strings.Split(line, ": ")[1]
 	num := strings.Split(line, " | ")
 	want := strings.Split(num[0], " ")
 	have := strings.Split(num[1], " ")
-
 	r := 0
 	for _, h := range have {
 		for _, w := range want {
@@ -55,13 +41,13 @@ func parseCard(res chan<- int, line string, wg *sync.WaitGroup) {
 				if r == 0 {
 					r = 1
 				} else {
-					r = r * 2
+					r *= 2
 				}
+				break
 			}
 		}
 	}
-
-	res <- r
+	return r
 }
 
 func partTwo(rd io.Reader) int {
