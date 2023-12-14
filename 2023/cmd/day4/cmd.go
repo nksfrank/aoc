@@ -21,32 +21,33 @@ func partOne(rd io.Reader) int {
 	sum := 0
 	for s.Scan() {
 		line := s.Text()
-		sum += parseCard(line)
+		want, have := parseCard(line)
+		r := 0
+		for _, h := range have {
+			for _, w := range want {
+				if h == w {
+					if r == 0 {
+						r = 1
+					} else {
+						r *= 2
+					}
+					break
+				}
+			}
+		}
+		sum += r
 	}
 
 	return sum
 }
 
-func parseCard(line string) int {
+func parseCard(line string) (want, have []string) {
 	line = strings.ReplaceAll(line, "  ", " ")
 	line = strings.Split(line, ": ")[1]
 	num := strings.Split(line, " | ")
-	want := strings.Split(num[0], " ")
-	have := strings.Split(num[1], " ")
-	r := 0
-	for _, h := range have {
-		for _, w := range want {
-			if h == w {
-				if r == 0 {
-					r = 1
-				} else {
-					r *= 2
-				}
-				break
-			}
-		}
-	}
-	return r
+	want = strings.Split(num[0], " ")
+	have = strings.Split(num[1], " ")
+	return
 }
 
 func partTwo(rd io.Reader) int {
