@@ -51,5 +51,34 @@ func parseCard(line string) (want, have []string) {
 }
 
 func partTwo(rd io.Reader) int {
-	panic("not implemented")
+	s := bufio.NewScanner(rd)
+	wins := make(map[int]int)
+	id := 0
+	for s.Scan() {
+		wins[id] += 1
+		line := s.Text()
+		want, have := parseCard(line)
+
+		won := 0
+		for _, h := range have {
+			for _, w := range want {
+				if h == w {
+					won++
+					break
+				}
+			}
+		}
+
+		for i := id + 1; i <= id+won; i++ {
+			wins[i] += 1 + wins[id] - 1
+		}
+
+		id++
+	}
+
+	sum := 0
+	for _, v := range wins {
+		sum += v
+	}
+	return sum
 }
