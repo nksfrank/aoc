@@ -76,7 +76,9 @@ func TestDayFour(t *testing.T) {
 }
 
 func BenchmarkDayFour(t *testing.B) {
+	r := cmdtest.InputB(t, "test.txt")
 	for i := 0; i < t.N; i++ {
-		partOne(cmdtest.InputB(t, "test.txt"))
+		partTwo(r)
+
 	}
 }
