@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"unicode"
 
-	"github.com/nksfrank/aoc/internal/aoc"
+	"github.com/nksfrank/aoc/cmd/internal/utils"
 	"github.com/spf13/cobra"
 )
 
-var Cmd = aoc.NewDayCmd(&cobra.Command{
+var Cmd = utils.NewDayCmd(&cobra.Command{
 	Use:   "3",
 	Short: "Day three of Advent of Code 2023",
 	Long:  "Day three of Advent of Code 2023",

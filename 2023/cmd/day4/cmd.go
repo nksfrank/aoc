@@ -5,12 +5,11 @@ import (
 	"io"
 	"strings"
 
-	"github.com/nksfrank/aoc/internal/aoc"
+	"github.com/nksfrank/aoc/cmd/internal/utils"
 	"github.com/spf13/cobra"
 )
 
-
-var Cmd = aoc.NewDayCmd(&cobra.Command{
+var Cmd = utils.NewDayCmd(&cobra.Command{
 	Use:   "4",
 	Short: "Day four of Advent of Code 2023",
 	Long:  "Day four of Advent of Code 2023",
