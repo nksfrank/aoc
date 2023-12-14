@@ -74,3 +74,9 @@ func TestDayFour(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkDayFour(t *testing.B) {
+	for i := 0; i < t.N; i++ {
+		partOne(cmdtest.InputB(t, "test.txt"))
+	}
+}
