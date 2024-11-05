@@ -3,20 +3,20 @@ name: Tests 2023
 on:
   push:
     branches: [ "main" ]
-    paths: ["/2023/**"]
+    paths: ["2023/**"]
   workflow_dispatch:
     
 jobs:
   test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./2023
 
     steps:
-    - name: 🛎️ checkout repository
+    - name: 🛎️ Checkout repository
       uses: actions/checkout@v4
-    - uses: actions/setup-go@v5
+    
+    - name: 🚚 Set up Go
+      uses: actions/setup-go@v5
       
-    - name: 🧪 run tests
-      run: go test ./..
+    - name: 🧪 Run tests
+      working-directory: "2023"
+      run: go test ./...
