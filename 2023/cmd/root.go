@@ -8,6 +8,7 @@ import (
 	"github.com/nksfrank/aoc/cmd/day2"
 	"github.com/nksfrank/aoc/cmd/day3"
 	"github.com/nksfrank/aoc/cmd/day4"
+	"github.com/nksfrank/aoc/cmd/day5"
 	"github.com/spf13/cobra"
 )
 
@@ -20,7 +21,7 @@ var rootCmd = &cobra.Command{
 }
 
 var dayCmd = &cobra.Command{
-	Use:   "day",
+	Use: "day",
 	Run: func(cmd *cobra.Command, args []string) {},
 }
 
@@ -30,6 +31,7 @@ func init() {
 		day2.Cmd,
 		day3.Cmd,
 		day4.Cmd,
+		day5.Cmd,
 	)
 	rootCmd.AddCommand(dayCmd)
 }
@@ -40,3 +42,4 @@ func Execute() {
 		os.Exit(1)
 	}
 }
+
