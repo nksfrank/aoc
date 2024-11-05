@@ -1,0 +1,27 @@
+name: Tests 2022
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: ["/2022/**"]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 🛎️ checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: canary
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: 🚚 install packages
+      run: bun install
+      
+    - name: 🧪 run tests
+      run: bun test
