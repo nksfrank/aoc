@@ -17,7 +17,7 @@ func TestDayFive(t *testing.T) {
 }
 
 func TestParseSeed(t *testing.T) {
-	assert.Equal(t, []int64{79, 14, 55, 13}, parseSeed("seeds: 79 14 55 13"))
+	assert.Equal(t, [][]int64{{79, 14, 55, 13}}, parseSeed("seeds: 79 14 55 13"))
 }
 func TestParseRange(t *testing.T) {
 	assert.Equal(t, Range{DestStart: 50, SourceStart: 98, Length: 2}, parseRange(`50 98 2`))
