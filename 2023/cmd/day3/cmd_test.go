@@ -10,16 +10,16 @@ import (
 
 func TestDayThree(t *testing.T) {
 	tests := []struct {
-		name string
-		want int
+		name  string
+		want  int
 		input io.Reader
-		fn func(r io.Reader) int
+		fn    func(r io.Reader) int
 	}{
 		{
-			name: "part one",
-			want: 4361,
+			name:  "part one",
+			want:  4361,
 			input: cmdtest.Input(t, "test.txt"),
-			fn: partOne,
+			fn:    partOne,
 		},
 		// {
 		// 	name: "connecting parts",
@@ -28,10 +28,10 @@ func TestDayThree(t *testing.T) {
 		// 	fn: partOne,
 		// },
 		{
-			name: "part two",
-			want: 467835,
+			name:  "part two",
+			want:  467835,
 			input: cmdtest.Input(t, "test.txt"),
-			fn: partTwo,
+			fn:    partTwo,
 		},
 		// {
 		// 	name: "index_out_of_bounds",
