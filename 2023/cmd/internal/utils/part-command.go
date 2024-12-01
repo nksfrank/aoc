@@ -64,4 +64,3 @@ func NewDayCmd[T comparable](cmd *cobra.Command, fns ...func(io.Reader) T) *cobr
 	cmd.Run = PartRunR(fns...)
 	return cmd
 }
-

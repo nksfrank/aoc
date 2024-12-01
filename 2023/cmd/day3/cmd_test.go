@@ -49,6 +49,6 @@ func TestDayThree(t *testing.T) {
 			got := tt.fn(tt.input)
 			assert.Equal(t, tt.want, got)
 		})
-	
+
 	}
 }

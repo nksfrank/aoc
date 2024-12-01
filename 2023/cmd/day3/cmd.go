@@ -39,7 +39,7 @@ func isGear(r rune) bool {
 }
 
 func partOne(rd io.Reader) int {
-	lines := scanLines(rd) 
+	lines := scanLines(rd)
 
 	sum := 0
 	for y, line := range lines {
@@ -53,7 +53,7 @@ func partOne(rd io.Reader) int {
 				continue
 			}
 			if x1 != -1 {
-				n, _ := strconv.Atoi(line[x1:x2+1])
+				n, _ := strconv.Atoi(line[x1 : x2+1])
 				if partAdjacent(lines, x1, x2, y) {
 					sum += n
 				}
@@ -61,7 +61,7 @@ func partOne(rd io.Reader) int {
 			x1, x2 = -1, -1
 		}
 		if x1 != -1 {
-			n, _ := strconv.Atoi(line[x1:x2+1])
+			n, _ := strconv.Atoi(line[x1 : x2+1])
 			if partAdjacent(lines, x1, x2, y) {
 				sum += n
 			}
@@ -72,13 +72,14 @@ func partOne(rd io.Reader) int {
 
 var neighbours = []struct{ x, y int }{
 	{-1, -1}, {0, -1}, {1, -1},
-	{-1,  0},          {1,  0},
-	{-1,  1}, {0,  1}, {1,  1},
+	{-1, 0}, {1, 0},
+	{-1, 1}, {0, 1}, {1, 1},
 }
+
 func partAdjacent(lines []string, x1, x2, y int) bool {
 	for x := x1; x <= x2; x++ {
 		for _, n := range neighbours {
-			nX, nY := x + n.x, y + n.y
+			nX, nY := x+n.x, y+n.y
 			if !inBounds(lines, nX, nY) {
 				continue
 			}
@@ -102,7 +103,7 @@ func partTwo(rd io.Reader) int {
 			gears := []int{}
 			var prev_gear int
 			for _, nbr := range neighbours {
-				nX, nY := x + nbr.x, y + nbr.y
+				nX, nY := x+nbr.x, y+nbr.y
 				if !inBounds(s, nX, nY) {
 					continue
 				}
@@ -113,7 +114,7 @@ func partTwo(rd io.Reader) int {
 
 				xs := leftMostIndex(row, nX)
 				xe := rightMostIndex(row, nX)
-				n, _ := strconv.Atoi(string(row[xs:xe+1]))
+				n, _ := strconv.Atoi(string(row[xs : xe+1]))
 				if prev_gear == n {
 					continue
 				}
@@ -121,8 +122,8 @@ func partTwo(rd io.Reader) int {
 				gears = append(gears, n)
 				prev_gear = n
 			}
-			
-			if(len(gears) != 2) {
+
+			if len(gears) != 2 {
 				continue
 			}
 
@@ -155,6 +156,6 @@ func leftMostIndex(row string, start int) int {
 		}
 		r = n
 	}
-	
+
 	return int(math.Max(0, float64(r)))
 }

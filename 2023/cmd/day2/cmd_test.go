@@ -10,22 +10,22 @@ import (
 
 func TestDayTwo(t *testing.T) {
 	tests := []struct {
-		name string
-		want int
+		name  string
+		want  int
 		input io.Reader
-		fn func(r io.Reader) int
+		fn    func(r io.Reader) int
 	}{
 		{
-			name: "part one",
-			want: 8,
+			name:  "part one",
+			want:  8,
 			input: cmdtest.Input(t, "test.txt"),
-			fn: partOne,
+			fn:    partOne,
 		},
 		{
-			name: "part two",
-			want: 2286,
+			name:  "part two",
+			want:  2286,
 			input: cmdtest.Input(t, "test.txt"),
-			fn: partTwo,
+			fn:    partTwo,
 		},
 	}
 

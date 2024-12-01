@@ -18,7 +18,7 @@ var Cmd = utils.NewDayCmd(&cobra.Command{
 
 func partOne(rd io.Reader) int {
 	s := bufio.NewScanner(rd)
-	
+
 	var (
 		id        = 0
 		sum       = 0
@@ -70,7 +70,7 @@ func partOne(rd io.Reader) int {
 
 func partTwo(rd io.Reader) int {
 	s := bufio.NewScanner(rd)
-	
+
 	sum := 0
 	for s.Scan() {
 		line := s.Text()
