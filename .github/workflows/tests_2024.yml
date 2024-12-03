@@ -5,7 +5,15 @@ on:
     branches: [ "main" ]
     paths: ["2024/**"]
   workflow_dispatch:
-    
+
+defaults:
+  run:
+    working-directory: "2024"
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
