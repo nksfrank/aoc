@@ -1,10 +1,7 @@
-import type { BunFile } from "bun";
-import { assert, run } from "./utils";
+import { run } from "../utils";
 
-export async function partOne(input: BunFile): Promise<number> {
-  assert(await input.exists(), "no file found");
-  const text = await input.text();
-  const [left, right] = text
+export async function partOne(input: string): Promise<number> {
+  const [left, right] = input
     .split("\n")
     .filter((l) => l !== "")
     .map((l) => l.split(" "))
@@ -14,17 +11,15 @@ export async function partOne(input: BunFile): Promise<number> {
         [a, ...l],
         [b, ...r],
       ],
-      [[], []] as [number[], number[]],
+      [[], []] as [number[], number[]]
     );
   left.sort();
   right.sort();
   return left.reduce((sum, n, i) => sum + Math.abs(n - right[i]), 0);
 }
 
-export async function partTwo(input: BunFile): Promise<number> {
-  assert(await input.exists(), "no file found");
-  const text = await input.text();
-  const [left, right] = text
+export async function partTwo(input: string): Promise<number> {
+  const [left, right] = input
     .split("\n")
     .filter((l) => l !== "")
     .map((l) => l.split(" "))
@@ -34,7 +29,7 @@ export async function partTwo(input: BunFile): Promise<number> {
         [a, ...l],
         [b, ...r],
       ],
-      [[], []] as [number[], number[]],
+      [[], []] as [number[], number[]]
     );
 
   const parse = new Map<number, number>();
@@ -51,7 +46,9 @@ export async function partTwo(input: BunFile): Promise<number> {
 }
 
 run(async () => {
-  const file = Bun.file(new URL("one.input.txt", import.meta.url));
-  console.log("Day 1 part 1:", await partOne(file));
-  console.log("Day 1 part 2:", await partTwo(file));
+  const input = await Bun.file(
+    new URL("one.input.txt", import.meta.url)
+  ).text();
+  console.log("Day 1 part 1:", await partOne(input));
+  console.log("Day 1 part 2:", await partTwo(input));
 });

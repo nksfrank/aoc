@@ -1,4 +1,4 @@
-import { run } from "./utils";
+import { run } from "../utils";
 
 const r1 = /mul\((?<x>\d+),(?<y>\d+)\)/g;
 export const partOne = (input: string): number =>
@@ -26,5 +26,6 @@ run(async () => {
   const input = await Bun.file(
     new URL("three.input.txt", import.meta.url)
   ).text();
-  console.log(partOne(input), partTwo(input));
+  console.log("Day 1 part 1:", partOne(input));
+  console.log("Day 1 part 2:", partTwo(input));
 });
