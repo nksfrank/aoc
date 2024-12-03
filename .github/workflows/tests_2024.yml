@@ -1,0 +1,21 @@
+name: Tests 2023
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: ["2024/**"]
+  workflow_dispatch:
+    
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 🛎️ Checkout repository
+      uses: actions/checkout@v4
+
+    - name: 🚚 Set up bun
+      uses: oven-sh/setup-bun@v2
+
+    - name: 🧪 Run tests
+      run: bun test
