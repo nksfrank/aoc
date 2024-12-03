@@ -1,5 +1,5 @@
 import { describe, test, expect } from "bun:test";
-import { partOne, partTwo } from "./two";
+import { partOne, partTwo } from "./02";
 
 describe("day two", () => {
   describe("inputs", () => {
@@ -18,7 +18,7 @@ describe("day two", () => {
   });
   test("part two", async () => {
     expect(
-      partTwo(await Bun.file(new URL("two.test.txt", import.meta.url)).text()),
+      partTwo(await Bun.file(new URL("two.test.txt", import.meta.url)).text())
     ).toBe(4);
   });
 });

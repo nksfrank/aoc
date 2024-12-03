@@ -1,6 +1,6 @@
 import { run } from "../utils";
 
-export async function partOne(input: string): Promise<number> {
+export function partOne(input: string): number {
   const [left, right] = input
     .split("\n")
     .filter((l) => l !== "")
@@ -18,7 +18,7 @@ export async function partOne(input: string): Promise<number> {
   return left.reduce((sum, n, i) => sum + Math.abs(n - right[i]), 0);
 }
 
-export async function partTwo(input: string): Promise<number> {
+export function partTwo(input: string): number {
   const [left, right] = input
     .split("\n")
     .filter((l) => l !== "")
@@ -49,6 +49,6 @@ run(async () => {
   const input = await Bun.file(
     new URL("one.input.txt", import.meta.url)
   ).text();
-  console.log("Day 1 part 1:", await partOne(input));
-  console.log("Day 1 part 2:", await partTwo(input));
+  console.log("Day 1 part 1:", partOne(input));
+  console.log("Day 1 part 2:", partTwo(input));
 });
