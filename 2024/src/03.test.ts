@@ -4,7 +4,9 @@ import { partOne, partTwo } from "./03";
 describe("part three", () => {
   test("part one", async () => {
     expect(
-      partOne(await Bun.file(new URL("three.test.txt", import.meta.url)).text())
+      partOne(
+        "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"
+      )
     ).toBe(161);
   });
 

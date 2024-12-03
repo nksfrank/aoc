@@ -13,12 +13,12 @@ describe("day two", () => {
     });
   });
   test("part one", async () => {
-    const t = await Bun.file(new URL("two.test.txt", import.meta.url)).text();
+    const t = await Bun.file(new URL("02.test.txt", import.meta.url)).text();
     expect(partOne(t)).toBe(2);
   });
   test("part two", async () => {
     expect(
-      partTwo(await Bun.file(new URL("two.test.txt", import.meta.url)).text())
+      partTwo(await Bun.file(new URL("02.test.txt", import.meta.url)).text())
     ).toBe(4);
   });
 });
