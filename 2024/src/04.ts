@@ -1,13 +1,5 @@
 import { run } from "../utils";
 
-type Cell = {
-  c: string;
-  y: number;
-  x: number;
-};
-type CellDir = Cell & { dy: number; dx: number };
-const isDefined = <T>(x: T | undefined): x is T => x !== undefined;
-
 export function partOne(input: string): number {
   const matrix: number[][] = [
     [-1, -1],
@@ -23,127 +15,56 @@ export function partOne(input: string): number {
     .trim()
     .split("\n")
     .map((l) => l.split(""));
-  const ctoi = (y: number, x: number) => y * text.length + x;
-  const isInBounds = (y: number, x: number) =>
-    0 <= y && y < text.length && 0 <= x && x < text[0].length;
 
   return text
-    .flatMap((line, y) => {
-      return line.map((c, x) => {
-        if (c === "X") {
-          return { y, x, c };
-        }
-      });
-    })
-    .filter(isDefined)
-    .flatMap((cell) => {
-      const chars = new Map<number, CellDir>();
-      matrix.forEach(([dy, dx]) => {
-        const c = "M";
-        const y = cell.y + dy;
-        const x = cell.x + dx;
-        const i = ctoi(y, x);
-        if (!isInBounds(y, x) || text[y][x] !== c || chars.has(i)) {
-          return;
-        }
-        chars.set(i, {
-          y,
-          x,
-          c: c,
-          dy,
-          dx,
-        });
-      });
-      return [...chars.values()];
-    })
-    .map((cd) => {
-      const c = "A";
-      const y = cd.y + cd.dy;
-      const x = cd.x + cd.dx;
-      if (!isInBounds(y, x) || text[y][x] !== c) {
-        return;
-      }
-      return { ...cd, c, y, x };
-    })
-    .filter(isDefined)
-    .map((cd) => {
-      const c = "S";
-      const y = cd.y + cd.dy;
-      const x = cd.x + cd.dx;
-      if (!isInBounds(y, x) || text[y][x] !== c) {
-        return;
-      }
-      return { ...cd, c: "S", y, x };
-    })
-    .filter(isDefined).length;
+    .flatMap((l, y) =>
+      l.flatMap((c, x) =>
+        c !== "X"
+          ? [0]
+          : matrix.map(([dy, dx]) =>
+              !(
+                0 <= y + 3 * dy &&
+                y + 3 * dy < text.length &&
+                0 <= x + 3 * dx &&
+                x + 3 * dx < text[0].length
+              ) ||
+              !(
+                text[y + dy][x + dx] === "M" &&
+                text[y + 2 * dy][x + 2 * dx] === "A" &&
+                text[y + 3 * dy][x + 3 * dx] === "S"
+              )
+                ? 0
+                : 1
+            )
+      )
+    )
+    .reduce((sum, n) => sum + n, 0);
 }
+
 export function partTwo(input: string): number {
   const matrix: number[][] = [
     [-1, -1],
     [-1, 1],
-    [1, -1],
     [1, 1],
+    [1, -1],
   ];
   const text = input
     .trim()
     .split("\n")
     .map((l) => l.split(""));
-  const ctoi = (y: number, x: number) => y * text.length + x;
-  const isInBounds = (y: number, x: number) =>
-    0 <= y && y < text.length && 0 <= x && x < text[0].length;
 
-  const w = text
-    .flatMap((line, y) => {
-      return line.map((c, x) => {
-        if (c === "M") {
-          return { y, x, c };
-        }
-      });
-    })
-    .filter(isDefined)
-    .flatMap((cell) => {
-      const chars = new Map<number, CellDir & { p: number }>();
-      matrix.forEach(([dy, dx]) => {
-        const c = "A";
-        const y = cell.y + dy;
-        const x = cell.x + dx;
-        const i = ctoi(y, x);
-        if (!isInBounds(y, x) || text[y][x] !== c || chars.has(i)) {
-          return;
-        }
-        chars.set(i, {
-          y,
-          x,
-          c: c,
-          dy,
-          dx,
-          p: i,
-        });
-      });
-      return [...chars.values()];
-    })
-    .map((cd) => {
-      const c = "S";
-      const y = cd.y + cd.dy;
-      const x = cd.x + cd.dx;
-      if (!isInBounds(y, x) || text[y][x] !== c) {
-        return;
+  let count = 0;
+  for (let y = 1; y < text.length; y++) {
+    for (let x = 1; x < text[y].length; x++) {
+      const c = text[y][x];
+      if (c !== "A") continue;
+      const corners = matrix.map(([dy, dx]) => text[y - dy]?.[x - dx]).join("");
+      if (["MMSS", "MSSM", "SSMM", "SMMS"].some((c) => c === corners)) {
+        count++;
       }
-      return { ...cd, c, y, x };
-    })
-    .filter(isDefined)
-    .reduce(
-      (s, c) => {
-        if (s[c.p] === undefined) {
-          s[c.p] = 0;
-        }
-        s[c.p]++;
-        return s;
-      },
-      {} as Record<number, number>
-    );
-
-  return Object.values(w).filter((l) => l == 2).length;
+    }
+  }
+  return count;
 }
 
 run(async () => {
