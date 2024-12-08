@@ -10,3 +10,15 @@ Array.prototype.splitByElement = function <T>(
   const i = this.findIndex((e) => e === elem);
   return [this.slice(0, i), this.slice(i + 1)];
 };
+
+export function zip<T>(...arrays: T[][]): [...T[]][] {
+  const minLen = Math.min(...arrays.map((arr) => arr.length));
+  const [firstArr, ...restArrs] = arrays;
+  return firstArr
+    .slice(0, minLen)
+    .map((val, i) => [val, ...restArrs.map((arr) => arr[i])]);
+}
+
+export function len(arr: { length: number }): number {
+  return arr.length;
+}
