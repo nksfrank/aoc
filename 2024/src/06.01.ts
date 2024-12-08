@@ -1,6 +1,6 @@
 import { run } from "../utils";
 import "../pkg";
-import { getManhattanDistance, isLookingAt, lerp, vec, type Vec } from "../pkg";
+import { getManhattanDistance, isLookingAt, vec, type Vec } from "../pkg";
 
 const moveToEdge = (position: Vec, direction: Vec, grid: unknown[][]): Vec =>
   direction.x === 0
@@ -46,7 +46,8 @@ export function partOne(input: string): number {
         moveToEdge(pos, direction[facing], grid)
       );
     const next = obstacle.sub(direction[facing]);
-    lerp(pos, next)
+    pos
+      .lerp(next)
       .map((p) => p.toString())
       .forEach((p) => seen.add(p));
     pos = next;

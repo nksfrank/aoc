@@ -20,6 +20,9 @@ export function vec(x: number, y: number) {
     toString() {
       return [this.x, this.y].join();
     },
+    lerp(b: Coord) {
+      return lerp(this, b);
+    },
   };
 }
 
@@ -44,3 +47,21 @@ export function isLookingAt(self: Vec, direction: Vec, obstacle: Vec): boolean {
 
 export const getManhattanDistance = (a: Vec, b: Vec): number =>
   Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+
+export function lerp(a: Coord, b: Coord): Vec[] {
+  const res = [];
+  if (a.y === b.y) {
+    const start = Math.min(a.x, b.x);
+    const end = Math.max(a.x, b.x);
+    for (let x = start; x <= end; x++) {
+      res.push(vec(x, a.y));
+    }
+  } else if (a.x === b.x) {
+    const start = Math.min(a.y, b.y);
+    const end = Math.max(a.y, b.y);
+    for (let y = start; y <= end; y++) {
+      res.push(vec(a.x, y));
+    }
+  }
+  return res;
+}
