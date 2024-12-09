@@ -22,3 +22,9 @@ export function zip<T>(...arrays: T[][]): [...T[]][] {
 export function len(arr: { length: number }): number {
   return arr.length;
 }
+
+export function* enumerate<T>(arr: T[]): Generator<[number, T]> {
+  for (let i = 0; i < arr.length; i++) {
+    yield [i, arr[i]];
+  }
+}

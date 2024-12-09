@@ -1,39 +1,46 @@
-export function parse(input: string): [number | ".", number][] {
-  let id = 0;
-  return input
-    .split("")
-    .map((c, i) => {
-      const block = i % 2 === 0 ? id++ : id;
-      if (Number(c) === 0) {
-        return null;
-      }
-      return [i % 2 === 0 ? block : ".", Number(c)];
-    })
-    .filter((c) => c !== null) as [number | ".", number][];
-}
+import { assert, enumerate } from "../pkg";
 
-export function move(input: string[]): string[] {
-  const res = structuredClone(input);
-  for (let i = res.length - 1; i >= 0; i--) {
-    if (Number.isInteger(Number(res[i]))) {
-      for (let j = 0; j < i; j++) {
-        if (res[j] === ".") {
-          res[j] = res[i];
-          res[i] = ".";
-          break;
+export function partTwo(input: string): number {
+  let id = 0;
+  let pos = 0;
+  const files: Record<number, [number, number]> = {};
+  const blanks: [number, number][] = [];
+  for (let i = 0; i < input.length; i++) {
+    const n = parseInt(input[i], 10);
+    if (i % 2 === 0) {
+      assert(n !== 0, "unexpected 0 for file");
+      files[id] = [pos, n];
+      id++;
+    } else if (n !== 0) {
+      blanks.push([pos, n]);
+    }
+    pos += n;
+  }
+
+  while (id > 0) {
+    id--;
+    const [pos, size] = files[id];
+    for (const [i, [start, length]] of enumerate(blanks)) {
+      if (start >= pos) {
+        blanks.splice(i, blanks.length - i);
+        break;
+      } else if (size <= length) {
+        files[id] = [start, size];
+        if (size === length) {
+          blanks.splice(i, 1);
+        } else {
+          blanks[i] = [start + size, length - size];
         }
+        break;
       }
     }
   }
-  return res;
-}
 
-export function sum(input: string[]): number {
-  return input.reduce(
-    (acc, c, i) => (input[i] === "." ? acc : acc + i * Number(input[i])),
-    0
-  );
-}
-export function partTwo(input: string): number {
-  return 0;
+  let sum = 0;
+  for (const [id, [pos, size]] of Object.entries(files)) {
+    for (let x = pos; x < pos + size; x++) {
+      sum += parseInt(id, 10) * x;
+    }
+  }
+  return sum;
 }
