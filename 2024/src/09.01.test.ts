@@ -1,8 +1,8 @@
 import { describe, test, expect } from "bun:test";
-import { move, parse, partOne, partTwo, sum } from "./07";
+import { move, parse, partOne, sum } from "./09.01";
 
-describe("07", async () => {
-  const input = await Bun.file(new URL("07.test.txt", import.meta.url)).text();
+describe("09.01", async () => {
+  const input = await Bun.file(new URL("09.test.txt", import.meta.url)).text();
   test("parse", async () => {
     expect(parse("2333133121414131402").join("")).toBe(
       "00...111...2...333.44.5555.6666.777.888899"
@@ -26,9 +26,5 @@ describe("07", async () => {
 
   test("partOne", async () => {
     expect(partOne(input)).toBe(1928);
-  });
-
-  test.skip("partTwo", async () => {
-    expect(partTwo(input)).toBe(2858);
   });
 });
