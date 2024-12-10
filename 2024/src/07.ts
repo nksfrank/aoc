@@ -51,43 +51,33 @@ function* operations(
 }
 
 export function partOne(input: string): number {
-  const data = input
+  return input
     .split("\n")
     .map((l) => l.split(":"))
     .map(
       ([test, values]) =>
         [Number(test), values.trim().split(" ").map(Number)] as const
+    )
+    .reduce(
+      (sum, [target, values]) =>
+        findTarget(target, values, ["+", "*"]) ? sum + target : sum,
+      0
     );
-
-  let res = 0;
-  for (const [target, values] of data) {
-    const found = findTarget(target, values, ["+", "*"]);
-    if (found) {
-      res += target;
-    }
-  }
-
-  return res;
 }
 
 export function partTwo(input: string): number {
-  const data = input
+  return input
     .split("\n")
     .map((l) => l.split(":"))
     .map(
       ([test, values]) =>
         [Number(test), values.trim().split(" ").map(Number)] as const
+    )
+    .reduce(
+      (sum, [target, values]) =>
+        findTarget(target, values, ["+", "*", "||"]) ? sum + target : sum,
+      0
     );
-
-  let res = 0;
-  for (const [target, values] of data) {
-    const found = findTarget(target, values, ["+", "*", "||"]);
-    if (found) {
-      res += target;
-    }
-  }
-
-  return res;
 }
 
 run(async () => {
