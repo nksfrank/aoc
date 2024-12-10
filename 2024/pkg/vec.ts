@@ -23,8 +23,17 @@ export function vec(x: number, y: number) {
     lerp(b: Coord) {
       return lerp(this, b);
     },
+    equals(b: Coord) {
+      return this.x === b.x && this.y === b.y;
+    },
   };
 }
+vec.ZERO = vec(0, 0);
+vec.ONE = vec(1, 1);
+vec.UP = vec(0, -1);
+vec.DOWN = vec(0, 1);
+vec.LEFT = vec(-1, 0);
+vec.RIGHT = vec(1, 0);
 
 /**
  *

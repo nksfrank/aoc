@@ -12,6 +12,7 @@ declare global {
       caseSensitive?: boolean
     ): number[];
     replaceAt(this: string, index: number, char: string): string;
+    atIndex(this: string, index: number): string;
   }
 }
 
@@ -59,6 +60,13 @@ Object.defineProperties(String.prototype, {
         replacement +
         this.substring(index + replacement.length)
       );
+    },
+  },
+  atIndex: {
+    value(this: string, index: number) {
+      const lines = this.replaceAll("\n", "");
+      assert(index < lines.length);
+      return lines.at(index)!;
     },
   },
 });
