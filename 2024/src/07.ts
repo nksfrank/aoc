@@ -31,7 +31,7 @@ function compute(values: readonly number[], ops: Operators[]): number {
     assert(!!values[i + 1], "missing value");
     res = opsfn[ops[i]](res, values[i + 1]);
   }
-  return Number(res);
+  return res;
 }
 
 type Operators = "+" | "*" | "||";
