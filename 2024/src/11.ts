@@ -1,3 +1,4 @@
+import "../pkg";
 import { run } from "../utils";
 
 const rules = (stone: number): number[] => {
@@ -23,27 +24,30 @@ export function partOne(input: string, blinks: number): number {
 }
 
 export function partTwo(input: string, blinks: number): number {
-  const cache = input
-    .split(" ")
-    .map((s) => Number(s))
-    .reduce((cache, num) => {
-      const count = cache.get(num) ?? 0;
-      cache.set(num, count + 1);
-      return cache;
-    }, new Map<number, number>());
-
-  const res = Array.from({ length: blinks }).reduce(
-    (cache: Map<number, number>) =>
-      Array.from(cache.entries()).reduce((new_cache, [num, count]) => {
-        rules(num).forEach((num) => {
-          const new_count = new_cache.get(num) ?? 0;
-          new_cache.set(num, new_count + count);
-        });
-        return new_cache;
-      }, new Map<number, number>()),
-    cache
-  );
-  return Array.from(res.values()).reduce((sum, num) => sum + num, 0);
+  return Array.range(0, blinks)
+    .reduce(
+      (cache) =>
+        cache
+          .fromEntries()
+          .reduce(
+            (new_cache, [num, count]) =>
+              rules(num).reduce(
+                (new_cache, num) =>
+                  new_cache.upsert(num, (num) => (num ?? 0) + count),
+                new_cache
+              ),
+            new Map<number, number>()
+          ),
+      input
+        .split(" ")
+        .map((s) => Number(s))
+        .reduce(
+          (cache, num) => cache.upsert(num, (num) => (num ?? 0) + 1),
+          new Map<number, number>()
+        )
+    )
+    .fromValues()
+    .reduce((sum, num) => sum + num, 0);
 }
 
 run(async () => {
